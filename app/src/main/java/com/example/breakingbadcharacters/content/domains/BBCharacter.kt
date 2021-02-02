@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName
 class BBCharacter(
     @SerializedName("char_id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("birthday") val birthday: String,
-    @SerializedName("occupation") val occupation: Array<String>,
-    @SerializedName("img") val imageUrl: String,
-    @SerializedName("status") val status: String,
-    @SerializedName("nickname") val nickname: String,
-    @SerializedName("appearance") val appearance: IntArray,
-    @SerializedName("portrayed") val portrayed: String,
-    @SerializedName("category") val series: String,
-    @SerializedName("better_call_saul_appearance") val bcsAppearance: IntArray
+    @SerializedName("birthday") val birthday: String?,
+    @SerializedName("occupation") val occupation: Array<String>?,
+    @SerializedName("img") val imageUrl: String?,
+    @SerializedName("status") val status: String?,
+    @SerializedName("nickname") val nickname: String?,
+    @SerializedName("appearance") val appearance: IntArray?,
+    @SerializedName("portrayed") val portrayed: String?,
+    @SerializedName("category") val series: String?,
+    @SerializedName("better_call_saul_appearance") val bcsAppearance: IntArray?
 ) {
 
     override fun equals(other: Any?): Boolean = (other is BBCharacter && other.id == id)

@@ -49,24 +49,30 @@ class CharacterDetailsFragment : Fragment() {
         character_detail_image.transitionName = transitionName
 
         bbCharacter?.let { character ->
-            character_detail_name.text = "${character.name} \"${character.nickname}\""
-            character_detail_occupation.text = getString(R.string.character_occupation) + " - " + character.occupation.joinToString { it }
-            character_detail_status.text = getString(R.string.character_status) + " - " + character.status
-            character_detail_seasons.text = getString(R.string.character_seasons) + " - " + character.appearance.joinToString { it.toString() }
+            if (character.nickname != null)
+                character_detail_name.text = "${character.name} \"${character.nickname}\""
+            else
+                character_detail_name.text = character.name
 
-            Glide.with(character_detail_image)
-                .load(character.imageUrl).listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        startPostponedEnterTransition()
-                        return false
-                    }
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
-                                                 dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        startPostponedEnterTransition()
-                        return false
-                    }
-                })
-                .into(character_detail_image)
+            character_detail_occupation.text = getString(R.string.character_occupation) + " - " + character.occupation?.joinToString { it }
+            character_detail_status.text = getString(R.string.character_status) + " - " + character.status
+            character_detail_seasons.text = getString(R.string.character_seasons) + " - " + character.appearance?.joinToString { it.toString() }
+
+            if (character.imageUrl != null)
+                Glide.with(character_detail_image)
+                    .load(character.imageUrl)
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            startPostponedEnterTransition()
+                            return false
+                        }
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
+                                                     dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            startPostponedEnterTransition()
+                            return false
+                        }
+                    })
+                    .into(character_detail_image)
         }
     }
 
